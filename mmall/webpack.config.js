@@ -2,7 +2,7 @@
 * @Author: Rosen
 * @Date:   2017-05-08 15:28:19
 * @Last Modified by:   huangegege
-* @Last Modified time: 2017-09-30 09:41:49
+* @Last Modified time: 2017-09-30 10:07:52
 */
 var webpack             = require('webpack');
 var ExtractTextPlugin   = require('extract-text-webpack-plugin');
@@ -40,7 +40,7 @@ var config = {
     },
     output: {
         path: './dist',
-        publicPath : '/module/dist',
+        publicPath : '/mmall/dist',
         filename: 'js/[name].js'
     },
     externals : {
