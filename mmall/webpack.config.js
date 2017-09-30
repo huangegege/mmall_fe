@@ -1,8 +1,8 @@
 /*
 * @Author: Rosen
 * @Date:   2017-05-08 15:28:19
-* @Last Modified by:   Rosen
-* @Last Modified time: 2017-05-30 16:50:46
+* @Last Modified by:   huangegege
+* @Last Modified time: 2017-09-30 09:41:49
 */
 var webpack             = require('webpack');
 var ExtractTextPlugin   = require('extract-text-webpack-plugin');
@@ -40,7 +40,7 @@ var config = {
     },
     output: {
         path: './dist',
-        publicPath : '/dist',
+        publicPath : '/module/dist',
         filename: 'js/[name].js'
     },
     externals : {
@@ -49,7 +49,7 @@ var config = {
     module: {
         loaders: [
             { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader","css-loader") },
-            { test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/, loader: 'url-loader?limit=100&name=resource/[name].[ext]' },
+            { test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/, loader: 'url-loader?limit=100&name=/resource/[name].[ext]' },
             { test: /\.string$/, loader: 'html-loader'}
         ]
     },
