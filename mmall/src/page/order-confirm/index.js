@@ -2,7 +2,7 @@
  * @Author: huangegege
  * @Date:   2017-11-02 11:39:55
  * @Last Modified by:   huangegege
- * @Last Modified time: 2017-11-02 17:59:58
+ * @Last Modified time: 2017-11-03 15:22:21
  */
 'use strict';
 require('./index.css');
@@ -58,28 +58,75 @@ var page = {
         }
       });
     });
+    // 地址的编辑
+    $(document).on('click', '.address-update', function(e) {
+      e.stopPropagation();
+      var shippingId = $(this).parents('.address-item').data('id');
+      _address.getAddress(shippingId, function(res) {
+        addressModal.show({
+          isUpdate: true,
+          data: res,
+          onSuccess: function() {
+            _this.loadAddressList();
+          }
+        });
+      }, function(errMsg) {
+        _mm.errorTips(errMsg);
+      });
+    });
+    // 地址的删除
+    $(document).on('click', '.address-delete', function(e) {
+      e.stopPropagation();
+      var id = $(this).parents('.address-item').data('id');
+      if (window.confirm('确认要删除该地址吗？')) {
+        _address.deleteAddress(id, function(res) {
+          _this.loadAddressList();
+        }, function(errMsg) {
+          _mm.errorTips(errMsg);
+        });
+      }
+    });
   },
   // 加载地址列表
   loadAddressList: function() {
     var _this = this;
+    $('.address-con').html('<div class="loading"></div>');
     // 获取地址列表
     _address.getAddressList(function(res) {
+      _this.addressFilter(res);
       var addressListHtml = _mm.renderHtml(templateAddress, res);
       $('.address-con').html(addressListHtml);
     }, function(errMsg) {
       $('.address-con').html('<p class="error-tip">地址加载失败，请刷新后重试</p>')
-    })
+    });
+  },
+  // 处理地址列表中选中状态
+  addressFilter: function(data) {
+    if (this.data.selectedAddressId) {
+      var selectedAddressIdFlag = false;
+      for (var i = 0, length = data.list.length; i < length; i++) {
+        if (data.list[i].id === this.data.selectedAddressId) {
+          data.list[i].isActive = true;
+          selectedAddressIdFlag = true;
+        }
+      }
+      // 如果以前选中的地址不在列表里，将其删除
+      if (!selectedAddressIdFlag) {
+        this.data.selectedAddressId = null;
+      }
+    }
   },
   // 加载商品列表
   loadProductList: function() {
     var _this = this;
+    $('.product-con').html('<div class="loading"></div>');
     // 获取商品列表
     _order.getProductList(function(res) {
       var productListHtml = _mm.renderHtml(templateProduct, res);
       $('.product-con').html(productListHtml);
     }, function(errMsg) {
       $('.product-con').html('<p class="error-tip">商品信息加载失败，请刷新后重试</p>')
-    })
+    });
   }
 };
 $(function() {

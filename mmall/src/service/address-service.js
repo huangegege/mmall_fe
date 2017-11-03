@@ -2,7 +2,7 @@
  * @Author: huangegege
  * @Date:   2017-11-02 16:13:12
  * @Last Modified by:   huangegege
- * @Last Modified time: 2017-11-03 11:37:46
+ * @Last Modified time: 2017-11-03 15:06:02
  */
 'use strict';
 
@@ -25,6 +25,37 @@ var _address = {
     _mm.request({
       url: _mm.getServerUrl('/shipping/add.do'),
       data: addressInfo,
+      success: resolve,
+      error: reject
+    });
+  },
+  // 更新收件人
+  update: function(addressInfo, resolve, reject) {
+    _mm.request({
+      url: _mm.getServerUrl('/shipping/update.do'),
+      data: addressInfo,
+      success: resolve,
+      error: reject
+    });
+  },
+  //删除收件人
+  deleteAddress: function(shippingId, resolve, reject) {
+    _mm.request({
+      url: _mm.getServerUrl('/shipping/del.do'),
+      data: {
+        shippingId: shippingId
+      },
+      success: resolve,
+      error: reject
+    });
+  },
+  // 获取单条收件人信息
+  getAddress: function(shippingId, resolve, reject) {
+    _mm.request({
+      url: _mm.getServerUrl('/shipping/select.do'),
+      data: {
+        shippingId: shippingId
+      },
       success: resolve,
       error: reject
     });
