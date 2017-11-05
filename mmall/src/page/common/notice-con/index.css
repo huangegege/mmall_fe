@@ -1,0 +1,23 @@
+/*
+* @Author: huangegege
+* @Date:   2017-11-05 16:58:01
+* @Last Modified by:   huangegege
+* @Last Modified time: 2017-11-05 17:22:34
+*/
+.notice-con {
+    background: #c60023;
+    padding: 5px 0;
+    line-height: 30px;
+}
+.notice-con .notice {
+    font-size: 14px;
+    color: #eee;
+    font-weight: 700;
+    text-align: center;
+}
+/*.notice-con .notice .notice-link {
+    color: #fff;
+    padding: 5px;
+    text-decoration: none;
+    background: #fb5505;
+}*/

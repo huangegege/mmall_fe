@@ -5,6 +5,7 @@
         <title><%= htmlWebpackPlugin.options.title%> - happymmall电商平台</title>
     </head>
     <body>
+        <%= require('html-loader!./layout/notice-con.html')  %>
         <%= require('html-loader!./layout/nav-simple.html')  %>
         <div class="page-wrap w">
             <div class="result-con register-success">
